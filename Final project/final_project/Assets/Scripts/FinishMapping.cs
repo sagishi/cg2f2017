@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class FinishMapping : MonoBehaviour, ISpeechHandler
 {
+    public delegate void MappingEvent();
+    public static event MappingEvent OnFinished;
 
+    
     
     public SpatialUnderstandingCustomMesh spatialUnderstandMesh;
     
@@ -23,13 +26,14 @@ public class FinishMapping : MonoBehaviour, ISpeechHandler
                 spatialUnderstandMesh.DrawProcessedMesh = false;
                 
                 
-//                SpatialUnderstandingCustomMesh scriptObject =
-//                    spatialunderstand.GetComponent<SpatialUnderstandingCustomMesh>();
-//                if (scriptObject != null)
-//                {
-//                    scriptObject.DrawProcessedMesh = false;
-//                    Debug.Log("FinishMapping: found custom mesh and disabled it");
-//                }
+//                gameObject.SendMessage("OnFinishedMapping");
+                if (OnFinished != null)
+                {
+                    Debug.Log("Invoking OnFinished for finished spatial mapping");
+                    OnFinished();
+                }
+                
+                
                 break;
 
             default:
