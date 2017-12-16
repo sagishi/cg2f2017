@@ -7,8 +7,8 @@ using UnityEngine;
 public class FinishMapping : MonoBehaviour, ISpeechHandler
 {
 
-    public Material OccludMaterial;
-    public GameObject spatialunderstand;
+    
+    public SpatialUnderstandingCustomMesh spatialUnderstandMesh;
     
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)
@@ -20,13 +20,16 @@ public class FinishMapping : MonoBehaviour, ISpeechHandler
                 
                 SpatialUnderstanding.Instance.RequestFinishScan();
 
-                SpatialUnderstandingCustomMesh scriptObject =
-                    spatialunderstand.GetComponent<SpatialUnderstandingCustomMesh>();
-                if (scriptObject != null)
-                {
-                    scriptObject.DrawProcessedMesh = false;
-                    Debug.Log("FinishMapping: found custom mesh and disabled it");
-                }
+                spatialUnderstandMesh.DrawProcessedMesh = false;
+                
+                
+//                SpatialUnderstandingCustomMesh scriptObject =
+//                    spatialunderstand.GetComponent<SpatialUnderstandingCustomMesh>();
+//                if (scriptObject != null)
+//                {
+//                    scriptObject.DrawProcessedMesh = false;
+//                    Debug.Log("FinishMapping: found custom mesh and disabled it");
+//                }
                 break;
 
             default:
